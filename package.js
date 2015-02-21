@@ -6,7 +6,7 @@ Package.describe({
 
 Package.onUse(function(api) {
   api.versionsFrom('METEOR@1.0.3');
-  api.use(['reactive-var', 'templating', 'underscore', 'maxharris9:template-instance-utils'], 'client');
+  api.use(['reactive-var', 'templating', 'maxharris9:template-instance-utils'], 'client');
 
   api.addFiles('styles.js', 'client');
   api.addFiles('switch.html', 'client');
