@@ -1,12 +1,13 @@
 Package.describe({
   summary: "Switch component for Meteor",
   version: "1.0.0",
-  git: "https://github.com/maxharris9/maxharris9-switch.git"
+  git: "https://github.com/maxharris9/maxharris9-switch.git",
+  documentation: null
 });
 
 Package.onUse(function(api) {
   api.versionsFrom('METEOR@1.0.3');
-  api.use(['reactive-var', 'templating', 'maxharris9:template-instance-utils'], 'client');
+  api.use(['reactive-var', 'templating', 'maxharris9:template-instance-utils@1.0.3'], 'client');
 
   api.addFiles('styles.js', 'client');
   api.addFiles('switch.html', 'client');
