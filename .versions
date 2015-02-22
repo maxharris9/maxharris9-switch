@@ -21,11 +21,11 @@ jquery@1.11.3
 json@1.0.2
 launch-screen@1.0.1
 livedata@1.0.12
-local-test:maxharris9:switch@1.0.0
+local-test:maxharris9:switch@1.0.1
 logging@1.0.6
 maxharris9:hashmap@1.0.0
 maxharris9:straightsix@1.0.0
-maxharris9:switch@1.0.0
+maxharris9:switch@1.0.1
 maxharris9:template-instance-utils@1.0.3
 meteor@1.1.4
 meteor-platform@1.2.1
