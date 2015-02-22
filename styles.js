@@ -8,7 +8,7 @@ style = function (paletteOverride, styleOverride) {
   };
 
   return styleOverride || {
-    general: {
+    general: css.merge( {
       border: [css.px(1), css.solid, palette.passive],
       position: css.relative,
       display: css.inlineBlock,
@@ -20,22 +20,14 @@ style = function (paletteOverride, styleOverride) {
       overflow: css.hidden,
       marginTop: css.em(0.25),
       fontWeight: 600,
-      textTransform: css.uppercase,
-      webkitUserSelect: css.none,
-      msUserSelect: css.none,
-      mozUserSelect: css.none,
-      oUserSelect: css.none,
-      userSelect: css.none
-    },
-    switchBase: {
+      textTransform: css.uppercase
+    }, css.userSelect(css.none)),
+    switchBase: css.merge( {
       display: css.inlineBlock,
       height: css.pct(100),
       width: css.pct(40),
       borderRadius: css.pct(75),
-      webkitTransition: [css.marginLeft, 'cubic-bezier(0.34,1.61,0.7,1)', css.ms(250)],
-      mozTransition: [css.marginLeft, 'cubic-bezier(0.34,1.61,0.7,1)', css.ms(250)],
-      transition: [css.marginLeft, 'cubic-bezier(0.34,1.61,0.7,1)', css.ms(250)]
-    },
+    }, css.transition([css.marginLeft, 'cubic-bezier(0.34,1.61,0.7,1)', css.ms(250)])),
     open: {
       marginLeft: css.pct(60),
       background: palette.active
