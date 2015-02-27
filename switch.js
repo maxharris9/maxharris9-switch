@@ -6,7 +6,7 @@ switchSetup = function (initialState, switchCallback, elementId, externalUpdate,
     guid: generateGuid(),
     switchState: new ReactiveVar(initialState),
     style: style(paletteOverride, styleOverride),
-    update: externalUpdate // an external ReactiveVar that changes the switch state
+    externalUpdate: externalUpdate || new ReactiveVar(initialState) // an external ReactiveVar that changes the switch state
   };
 
   renderedView = Blaze.renderWithData(Template.switch, dataContext, domElement);
@@ -33,7 +33,7 @@ Template.switch.helpers({
   },
   nub: function () {
     var data = Template.instance().data;
-    data.switchState.set(data.update.get()); // external changes will trigger redraw
+    data.switchState.set(data.externalUpdate.get()); // external changes will trigger redraw
 
     if (data.switchState.get()) {
       return css.styleString(css.merge(data.style.switchBase, data.style.open));
@@ -48,6 +48,7 @@ Template.switch.events({
   'click .switch': function (event, template) {
     var newState = !template.data.switchState.get();
     template.data.switchState.set(newState);
+    template.data.externalUpdate.set(newState);
     template.data.switchCallback(newState);
   }
 });
