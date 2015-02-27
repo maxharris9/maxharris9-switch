@@ -1,6 +1,6 @@
 Package.describe({
   summary: "Switch component for Meteor",
-  version: "1.0.1",
+  version: "1.0.2",
   git: "https://github.com/max-leportlabs/maxharris9-switch.git",
   documentation: null
 });
