@@ -1,12 +1,18 @@
 switchSetup = function (initialState, switchCallback, elementId, externalUpdate, paletteOverride, styleOverride) {
   var domElement = document.getElementById(elementId);
 
+  var s = style(paletteOverride, styleOverride);
+
   var dataContext = {
     switchCallback: switchCallback,
     guid: generateGuid(),
     switchState: new ReactiveVar(initialState),
-    style: style(paletteOverride, styleOverride),
-    externalUpdate: externalUpdate || new ReactiveVar(initialState) // an external ReactiveVar that changes the switch state
+    externalUpdate: externalUpdate || new ReactiveVar(initialState), // an external ReactiveVar that changes the switch state
+    switchLabelOpen: css.registerClass(css.merge(s.switchLabelBase, s.switchLabelOpen)),
+    switchLabelClosed: css.registerClass(css.merge(s.switchLabelBase, s.switchLabelClosed)),
+    nubOpen: css.registerClass(css.merge(s.switchBase, s.open)),
+    nubClosed: css.registerClass(css.merge(s.switchBase, s.closed)),
+    general: css.registerClass(s.general)
   };
 
   renderedView = Blaze.renderWithData(Template.switch, dataContext, domElement);
@@ -17,30 +23,18 @@ Template.switch.helpers({
     var data = Template.instance().data;
     return data.switchState.get();
   },
-  style: function () {
+  general: function () {
     var data = Template.instance().data;
-    return css.styleString(data.style.general);
+    return data.general;
   },
   switchLabel: function () {
     var data = Template.instance().data;
-
-    if (data.switchState.get()) {
-      return css.styleString(css.merge(data.style.switchLabelBase, data.style.switchLabelOpen));
-    }
-    else {
-      return css.styleString(css.merge(data.style.switchLabelBase, data.style.switchLabelClosed));
-    }
+    return data.switchState.get() ? data.switchLabelOpen : data.switchLabelClosed;
   },
   nub: function () {
     var data = Template.instance().data;
     data.switchState.set(data.externalUpdate.get()); // external changes will trigger redraw
-
-    if (data.switchState.get()) {
-      return css.styleString(css.merge(data.style.switchBase, data.style.open));
-    }
-    else {
-      return css.styleString(css.merge(data.style.switchBase, data.style.closed));
-    }
+    return data.switchState.get() ? data.nubOpen : data.nubClosed;
   }
 });
 
